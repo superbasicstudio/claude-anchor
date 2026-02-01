@@ -4,6 +4,22 @@
 
 ---
 
+## Instructions for Claude
+
+**Read this file at session start (step 3 of the load order)** to avoid repeating past mistakes.
+
+- Before proposing solutions, check if a similar problem has been documented here
+- When a new non-obvious issue is discovered during the session, prompt the user to add it
+- Reference specific lessons when they are relevant to the current task
+- Add new entries immediately when issues are resolved — don't wait until the end of the session
+
+**When to update this file:**
+- Immediately after resolving any non-obvious issue
+- When discovering a gotcha that could affect future work
+- When a solution required significant debugging time
+
+---
+
 ## How to Use This File
 
 When you encounter a non-obvious problem or gotcha, document it here immediately:
@@ -79,6 +95,24 @@ with open(output_file, 'w') as f:
 
 ---
 
+## [DATE] - Example: Credential Leak in Git History
+
+**Problem:** API key was accidentally committed to `.env.example` file and pushed to a public repo.
+
+**Cause:** The `.env.example` file was supposed to contain placeholder values, but a real key was copy-pasted instead of a dummy value.
+
+**Solution:** Revoked the compromised key immediately. Used `git filter-branch` to remove the secret from git history. Generated a new key.
+
+**Prevention:**
+- Add pre-commit hooks that scan for credential patterns (e.g., `detect-secrets`, `gitleaks`)
+- Use placeholder values like `your-api-key-here` in example files, never real credentials
+- See Golden Rule #1: No Credentials in Code
+- Run `git diff --cached` before every commit to review staged changes
+
+---
+
+<!-- NOTE: Delete the example entries above once you have real lessons from your project. -->
+
 ## Categories
 
 <!-- Optional: Organize lessons by category as the list grows -->
@@ -98,3 +132,5 @@ with open(output_file, 'w') as f:
 ---
 
 **Add entries immediately when issues are discovered. Future you will thank past you.**
+
+<!-- Claude Anchor v1.0 -->

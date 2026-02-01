@@ -25,7 +25,7 @@ afterAll(async () => {
 describe('CLI', () => {
   test('shows version', () => {
     const output = runCLI('--version');
-    expect(output.trim()).toBe('1.0.0');
+    expect(output.trim()).toBe('1.1.0');
   });
 
   test('shows help', () => {

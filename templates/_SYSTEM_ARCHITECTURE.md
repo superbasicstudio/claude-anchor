@@ -4,6 +4,25 @@
 
 ---
 
+## Instructions for Claude
+
+**Reference this file when answering questions about system design, component interactions, or data flow.** This prevents Claude from making incorrect assumptions about how the system works.
+
+- Use these diagrams to understand the system before suggesting changes
+- When the user asks about architecture, reference specific diagrams and components from this file
+- When architecture changes during a session, prompt the user to update this file
+
+**When to update this file:**
+- When new components are added or removed
+- When data flow changes
+- When security boundaries shift
+- When error handling is modified
+- At major version releases
+
+**Security note:** Do not include credentials, internal hostnames, or IP addresses in architecture diagrams. Use generic labels like `[DATABASE_HOST]` or `[API_ENDPOINT]`.
+
+---
+
 ## High-Level Architecture
 
 <!-- CUSTOMIZE: Replace with your system's architecture -->
@@ -292,7 +311,7 @@
 
 ## Security Model
 
-<!-- CUSTOMIZE: If applicable -->
+<!-- CUSTOMIZE: Document trust boundaries, data validation points, authentication flows, and which components handle sensitive data. -->
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -319,3 +338,5 @@
 **Document Version:** 1.0
 **Created:** [DATE]
 **Purpose:** Technical reference for [PROJECT_NAME] internals
+
+<!-- Claude Anchor v1.0 -->

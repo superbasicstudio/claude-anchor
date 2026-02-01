@@ -15,15 +15,19 @@ This is Claude's "long-term memory" - permanent knowledge about:
 
 ## Instructions for Claude
 
+**Read this file at session start (step 4 of the load order).** This is your persistent knowledge base for this project and user.
+
 **On EVERY session start:**
-1. Check if `LONG-TERM-MEMORY.md` exists
+1. Check if `_LONG-TERM-MEMORY.md` exists
 2. If yes, READ IT COMPLETELY before engaging
 3. Apply all preferences, context, and rules contained within
 4. Reference this memory throughout the conversation
 
 **Memory file locations:**
-- `$HOME/LONG-TERM-MEMORY.md` - Main/global memory
-- `[PROJECT]/LONG-TERM-MEMORY.md` - Project-specific persistent memory
+- `[PROJECT]/_LONG-TERM-MEMORY.md` - Project-specific persistent memory
+- Optionally: `$HOME/_LONG-TERM-MEMORY.md` - Global memory (if user creates one)
+
+**Conflict resolution:** If content here conflicts with `_GOLDEN-RULES.md`, the Golden Rules ALWAYS take precedence.
 
 **NEVER delete this file** unless the user explicitly requests it.
 
@@ -42,8 +46,10 @@ This is Claude's "long-term memory" - permanent knowledge about:
 
 ## About the User
 
+**Privacy note:** Only include information you are comfortable having in a file that may be committed to version control. Use initials, a username, or a pseudonym if preferred. See Golden Rule #2: No PII Exposure.
+
 ### Identity
-- Name: [Name]
+- Name: [Name or username — your choice]
 - Role: [Developer/Admin/etc.]
 - Experience level: [Senior/Mid/Junior]
 
@@ -132,11 +138,12 @@ This is Claude's "long-term memory" - permanent knowledge about:
 
 ## Credentials & Access (References Only)
 
-**NEVER store actual passwords or secrets here.**
+**NEVER store actual passwords, API keys, tokens, or secrets here.** See Golden Rule #1.
 
-| Service | Username/Location | Notes |
-|---------|-------------------|-------|
-| [service] | [reference to secure storage] | [notes] |
+| Service | Where to Find Credentials | Notes |
+|---------|---------------------------|-------|
+| [service] | [e.g., 1Password vault "Dev"] | [notes] |
+| [service] | [e.g., `~/.config/[app]/credentials`] | [notes] |
 
 ---
 
@@ -271,4 +278,6 @@ Periodically (or when asked):
 
 ---
 
-*This is a TEMPLATE. Create actual memory at `$HOME/LONG-TERM-MEMORY.md`. NEVER DELETE without explicit user request.*
+*This is a TEMPLATE. Customize it with your project details. NEVER DELETE without explicit user request.*
+
+<!-- Claude Anchor v1.0 -->

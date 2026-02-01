@@ -1,12 +1,27 @@
 # Conversation Preferences - [PROJECT_NAME]
 
-**Load Priority:** Read alongside GOLDEN-RULES.md at session start.
+**Output formatting, communication style, and display preferences for Claude.**
+
+---
+
+## Instructions for Claude
+
+**Read this file at session start (step 5 of the load order).** Apply these formatting preferences to ALL output in this session.
+
+- These preferences are requirements, not suggestions — follow them consistently
+- If a user request conflicts with these preferences, follow the user's request for that specific instance
+- Use the progress bar format for operations processing >10 items or expected to take >30 seconds
+- For simple one-line results, a brief status message is sufficient — don't over-format
+
+**When to update this file:** When the user requests a different output format, verbosity level, or communication style.
+
+**Scope:** These preferences apply to interactive terminal/conversation output. For generated files and documentation, use standard markdown formatting.
 
 ---
 
 ## Display Preferences
 
-<!-- CUSTOMIZE: Define how you want output formatted -->
+<!-- CUSTOMIZE: Define how you want output formatted. These are examples — adjust to your preference. -->
 
 ### Progress Reporting
 
@@ -159,3 +174,5 @@ For operations expected to take >1 minute:
 ---
 
 **These preferences ensure consistent, scannable output.**
+
+<!-- Claude Anchor v1.0 -->

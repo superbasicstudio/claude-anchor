@@ -14,16 +14,21 @@ This is Claude's "short-term memory" - a way to preserve session context when:
 
 ## Instructions for Claude
 
-When a new session starts and `SHORT-TERM-MEMORY.md` exists:
+**If this file exists, read it FIRST (step 0 of the load order)** before all other Anchor files. This file restores interrupted session context.
+
+When a new session starts and `_SHORT-TERM-MEMORY.md` exists:
 
 1. **Read the memory file FIRST** before responding
-2. **Acknowledge context** - Let user know you've caught up
-3. **Verify current state** - Confirm where things left off
-4. **Resume seamlessly** - Continue from the documented step
+2. **Check the date** — if this file is older than 7 days, ask the user if it is still relevant before acting on it
+3. **Acknowledge context** — Let user know you've caught up
+4. **Verify current state** — Confirm where things left off
+5. **Resume seamlessly** — Continue from the documented step
 
 **Memory file locations:**
-- `$HOME/SHORT-TERM-MEMORY.md` - Main/default location
-- `[PROJECT]/SHORT-TERM-MEMORY.md` - Project-specific
+- `[PROJECT]/_SHORT-TERM-MEMORY.md` - Project-specific (takes precedence)
+- Optionally: `$HOME/_SHORT-TERM-MEMORY.md` - Global fallback
+
+**If both exist:** Project-specific memory takes precedence. Read it first.
 
 ---
 
@@ -65,6 +70,8 @@ Brief description of what's happening (e.g., "User is rebooting to complete X")
 ---
 
 ## Commands/Changes Made This Session
+
+**Security warning:** NEVER include commands containing secrets, tokens, or passwords. Redact sensitive values: `curl -H 'Authorization: Bearer [REDACTED]' ...`
 
 ```bash
 # Any new commands, scripts, or aliases created
@@ -211,4 +218,6 @@ When in doubt, ASK before deleting any memory file.
 
 ---
 
-*This is a TEMPLATE file. The actual memory file goes in `$HOME/SHORT-TERM-MEMORY.md` or project-specific locations. Wipe after task completion.*
+*This is a TEMPLATE file. Create actual memory files in your project root as `_SHORT-TERM-MEMORY.md`. Wipe after task completion.*
+
+<!-- Claude Anchor v1.0 -->
