@@ -1,0 +1,62 @@
+{
+  "name": "claude-anchor",
+  "version": "1.0.0",
+  "description": "Persistent memory, enforceable rules, and behavioral consistency for Claude Code",
+  "bin": {
+    "claude-anchor": "bin/init.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "claude",
+    "claude code",
+    "claude anchor",
+    "ai memory",
+    "ai context",
+    "persistent memory",
+    "rules framework",
+    "claude code framework",
+    "behavioral context",
+    "vibe coding",
+    "super basic studio"
+  ],
+  "author": "Super Basic Studio, LLC (https://superbasic.studio)",
+  "license": "BSD-2-Clause",
+  "files": [
+    "templates/",
+    "bin/",
+    "README.md"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superbasicstudio/claude-anchor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/superbasicstudio/claude-anchor/issues"
+  },
+  "homepage": "https://github.com/superbasicstudio/claude-anchor#readme",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/superbasicstudio"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/superbasicstudio"
+    }
+  ]
+}

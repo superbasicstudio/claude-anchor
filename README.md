@@ -13,8 +13,14 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/claude-anchor">
+    <img src="https://img.shields.io/npm/v/claude-anchor.svg" alt="npm version">
+  </a>
+  <a href="https://www.npmjs.com/package/claude-anchor">
+    <img src="https://img.shields.io/npm/dm/claude-anchor.svg" alt="npm downloads">
+  </a>
   <a href="https://github.com/superbasicstudio/claude-anchor/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-BSD--2--Clause-blue.svg" alt="license">
+    <img src="https://img.shields.io/npm/l/claude-anchor.svg" alt="license">
   </a>
 </p>
 
@@ -54,6 +60,7 @@ Give Claude persistent memory, enforceable rules, and behavioral consistency acr
 
 ### External Resources
 
+- [npm package](https://www.npmjs.com/package/claude-anchor) — `npx claude-anchor`
 - [Claude Conductor](https://github.com/superbasicstudio/claude-conductor) — Companion codebase documentation framework
 - [Changelog](CHANGELOG.md)
 - [Security Policy](SECURITY.md)
@@ -61,6 +68,24 @@ Give Claude persistent memory, enforceable rules, and behavioral consistency acr
 ## Quick Start
 
 [Back to top](#table-of-contents)
+
+### Option 1: npx (Recommended)
+
+```bash
+# Copy 3 essential templates into your project
+npx claude-anchor
+
+# Copy all 8 templates
+npx claude-anchor --full
+
+# Copy into a specific directory
+npx claude-anchor ./my-project
+
+# Overwrite existing files
+npx claude-anchor --force
+```
+
+### Option 2: Manual (git clone)
 
 ```bash
 # Clone the templates
@@ -72,10 +97,10 @@ cp claude-anchor/templates/_TODOS.md ./your-project/
 cp claude-anchor/templates/_LONG-TERM-MEMORY.md ./your-project/
 ```
 
-Then:
+### Then:
 
-1. Copy the template files you need into your project root
-2. Edit each `.md` file, replacing `[PLACEHOLDERS]` with your project-specific content
+1. Edit each `.md` file, replacing `[PLACEHOLDERS]` with your project-specific content
+2. Customize `_GOLDEN-RULES.md` with your project's constraints
 3. Claude reads these files automatically at the start of each session
 
 ## What It Does

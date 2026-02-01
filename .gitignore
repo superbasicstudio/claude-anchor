@@ -1,3 +1,6 @@
+# Dependencies
+node_modules/
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -9,6 +12,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Test output
+test-output/
 
 # Personal files (don't commit project-specific instances)
 *.txt
