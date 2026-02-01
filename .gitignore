@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+._*
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Test output
+test-output/
+
+# Environment and secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+
+# Claude Code local data
+.claude/
+
+# Editor swap files
+*.swp
+*.swo
+*~
+*.bak
+
+# Personal files (don't commit project-specific instances)
+*.txt
+*.png
+*.jpg
