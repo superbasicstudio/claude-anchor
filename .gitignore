@@ -1,0 +1,16 @@
+# OS files
+.DS_Store
+Thumbs.db
+._*
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Personal files (don't commit project-specific instances)
+*.txt
+*.png
+*.jpg
