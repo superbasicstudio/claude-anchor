@@ -20,6 +20,8 @@ const FULL_TEMPLATES = [
   ...MINIMAL_TEMPLATES,
   { src: '_LESSONS-LEARNED.md', desc: 'Problem/Cause/Solution/Prevention patterns' },
   { src: '_CONVERSATION-PREFERENCES.md', desc: 'Output formatting and communication style' },
+  { src: '_DESIGN-PREFERENCES.md', desc: 'Visual design, hover states, accessibility, UX rules' },
+  { src: '_VOICE-AND-TONE.md', desc: 'Personality, attitude, language style, communication vibe' },
   { src: '_LONG-TERM-MEMORY.md', desc: 'Persistent memory (NEVER delete)' },
   { src: '_SHORT-TERM-MEMORY.md', desc: 'Session context (delete when done)' },
   { src: '_SYSTEM_ARCHITECTURE.md', desc: 'Technical diagrams and system design' }
@@ -34,11 +36,11 @@ program
   .command('init [target-dir]', { isDefault: true })
   .description('Copy Anchor templates into your project')
   .option('-f, --force', 'Overwrite existing files')
-  .option('--full', 'Copy all 8 templates (default: 3 essential templates)')
+  .option('--full', 'Copy all 10 templates (default: 3 essential templates)')
   .addHelpText('after', `
 Examples:
   $ npx claude-anchor                  # Copy 3 essential templates
-  $ npx claude-anchor --full           # Copy all 8 templates
+  $ npx claude-anchor --full           # Copy all 10 templates
   $ npx claude-anchor ./my-project     # Copy into specific directory
   $ npx claude-anchor --force          # Overwrite existing files
 
@@ -50,6 +52,7 @@ Essential templates (default):
 Full template set (--full):
   All essential templates plus:
   - _LESSONS-LEARNED.md, _CONVERSATION-PREFERENCES.md
+  - _DESIGN-PREFERENCES.md, _VOICE-AND-TONE.md
   - _LONG-TERM-MEMORY.md, _SHORT-TERM-MEMORY.md
   - _SYSTEM_ARCHITECTURE.md`)
   .action(async (targetDir, options) => {
@@ -86,7 +89,7 @@ async function initializeAnchor(targetDir, options) {
   // Mode display
   if (options.full) {
     console.log(chalk.blue('+---------------------------------------+'));
-    console.log(chalk.blue('|') + chalk.blue.bold(' FULL: All 8 behavioral templates       ') + chalk.blue('|'));
+    console.log(chalk.blue('|') + chalk.blue.bold(' FULL: All 10 behavioral templates       ') + chalk.blue('|'));
     console.log(chalk.blue('+---------------------------------------+'));
     console.log(chalk.gray('  Rules, memory, preferences, architecture'));
     console.log(chalk.gray('  Complete behavioral context for Claude'));
@@ -95,7 +98,7 @@ async function initializeAnchor(targetDir, options) {
     console.log(chalk.green('|') + chalk.green.bold(' ESSENTIAL: 3 core templates            ') + chalk.green('|'));
     console.log(chalk.green('+---------------------------------------+'));
     console.log(chalk.gray('  CLAUDE.md + Golden Rules + TODOs'));
-    console.log(chalk.gray('  Use --full for all 8 templates'));
+    console.log(chalk.gray('  Use --full for all 10 templates'));
   }
   console.log('');
 
@@ -168,7 +171,7 @@ async function initializeAnchor(targetDir, options) {
     console.log('');
 
     if (!options.full) {
-      console.log(chalk.gray('  Want more? Run ') + chalk.cyan('npx claude-anchor --full') + chalk.gray(' for all 8 templates'));
+      console.log(chalk.gray('  Want more? Run ') + chalk.cyan('npx claude-anchor --full') + chalk.gray(' for all 10 templates'));
       console.log('');
     }
 

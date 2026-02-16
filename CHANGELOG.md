@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-16
+
+### Added
+- **`_VOICE-AND-TONE.md`** — New template for controlling Claude's personality, attitude, language style, vocabulary, response structure, commit message style, and error communication. Loaded as **step 1** in the session load order so Claude's personality is established before anything else.
+- **`_DESIGN-PREFERENCES.md`** — New template for visual design rules: lighter hover colors on interactive elements only (never dark), WCAG AA accessibility, keyboard/screen reader support, typography hierarchy, flat iconography, spacing scale, and UX principles.
+- Framework now ships **10 templates** (up from 8) in `--full` mode
+- Updated session load order: Voice & Tone is step 1, Golden Rules is step 2
+- Hover state rules explicitly scoped to interactive elements only — no hover effects on static content
+
+### Changed
+- Session load order reordered: `_VOICE-AND-TONE.md` now loads first (step 1), `_GOLDEN-RULES.md` loads second (step 2) as the BINDING enforcement layer
+- Anchor Files Reference table updated with new priority column values: `FIRST` for voice/tone, `BINDING` for golden rules
+- CLI help text updated to reflect 10 templates
+
 ## [1.1.0] - 2026-02-01
 
 ### Added
@@ -48,5 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SECURITY.md with vulnerability reporting policy
 - BSD 2-Clause license
 
+[1.2.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.2.0
 [1.1.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.1.0
 [1.0.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.0.0

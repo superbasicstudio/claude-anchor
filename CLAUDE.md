@@ -20,19 +20,23 @@ Claude Anchor is a **behavioral context framework** — a set of markdown templa
 3. **_TODOS.md** — Active tasks with priorities and blockers
 4. **_LESSONS-LEARNED.md** — Past mistakes and their fixes
 5. **_CONVERSATION-PREFERENCES.md** — Output formatting and communication style
-6. **_LONG-TERM-MEMORY.md** — Persistent knowledge (NEVER delete)
-7. **_SHORT-TERM-MEMORY.md** — Session context (delete when done)
-8. **_SYSTEM_ARCHITECTURE.md** — Technical diagrams and system design
+6. **_DESIGN-PREFERENCES.md** — Visual design, hover states, accessibility, iconography, UX rules
+7. **_VOICE-AND-TONE.md** — Personality, attitude, language style, communication vibe
+8. **_LONG-TERM-MEMORY.md** — Persistent knowledge (NEVER delete)
+9. **_SHORT-TERM-MEMORY.md** — Session context (delete when done)
+10. **_SYSTEM_ARCHITECTURE.md** — Technical diagrams and system design
 
 ### Session Load Order
 ```
-1. _GOLDEN-RULES.md        <- BINDING security rules
-2. _TODOS.md               <- Pending work
-3. _LESSONS-LEARNED.md     <- Avoid past mistakes
-4. _CONVERSATION-PREFERENCES.md <- Output formatting
-5. _GOLDEN-RULES.md        <- Re-read (prevent context decay)
-6. CLAUDE.md               <- Full project context
-7. BEGIN conversation
+1. _VOICE-AND-TONE.md       <- READ FIRST — personality and language style
+2. _GOLDEN-RULES.md         <- BINDING rules — MUST FOLLOW every session
+3. _TODOS.md                <- Pending work
+4. _LESSONS-LEARNED.md      <- Avoid past mistakes
+5. _CONVERSATION-PREFERENCES.md <- Output formatting
+6. _DESIGN-PREFERENCES.md   <- Visual design and UX rules
+7. _GOLDEN-RULES.md         <- Re-read (prevent context decay)
+8. CLAUDE.md                <- Full project context
+9. BEGIN conversation
 ```
 
 ## Key Design Decisions
@@ -64,4 +68,19 @@ Together they give Claude full context — what the project is AND how to work o
 - Don't let _TODOS.md go stale — update it regularly
 
 ## Version History
+- **v1.2.0** — Added `_DESIGN-PREFERENCES.md` and `_VOICE-AND-TONE.md` templates (10 templates total)
 - **v1.0.0** — Initial open-source release with 7 template files
+
+---
+
+## GOLDEN RULE — YOU ARE NOT THE PROJECT MANAGER
+
+**NEVER deprioritize, dismiss, or defer any issue the user raises.**
+
+- NEVER say something "isn't critical", "can wait", "is a nice-to-have", or "not needed right now"
+- NEVER suggest deferring a fix to a later session or a future opening of the case
+- NEVER editorialize about what features or fixes are more or less important
+- The user decides what matters. You diagnose and fix what is asked, immediately, without commentary about priority
+- You are a tool, not a project manager. No opinions on roadmap, priority, or scheduling
+
+**If a component is broken, diagnose it and fix it. Period.**
