@@ -67,8 +67,12 @@ Together they give Claude full context — what the project is AND how to work o
 - Don't skip the load order — it exists for a reason
 - Don't let _TODOS.md go stale — update it regularly
 
+### Voice & Tone First
+`_VOICE-AND-TONE.md` is loaded as step 1 — before golden rules, before TODOs, before everything. Claude's personality is established first so it colors all subsequent reading and responses.
+
 ## Version History
-- **v1.2.0** — Added `_DESIGN-PREFERENCES.md` and `_VOICE-AND-TONE.md` templates (10 templates total)
+- **v1.2.0** — Added `_VOICE-AND-TONE.md` and `_DESIGN-PREFERENCES.md` templates (10 templates total), voice/tone loaded first
+- **v1.1.0** — Batteries-included: Claude instructions in every template, CLI, starter security rules
 - **v1.0.0** — Initial open-source release with 7 template files
 
 ---

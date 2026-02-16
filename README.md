@@ -75,7 +75,7 @@ Give Claude persistent memory, enforceable rules, and behavioral consistency acr
 # Copy 3 essential templates into your project
 npx claude-anchor
 
-# Copy all 8 templates
+# Copy all 10 templates
 npx claude-anchor --full
 
 # Copy into a specific directory
@@ -109,9 +109,11 @@ cp claude-anchor/templates/_LONG-TERM-MEMORY.md ./your-project/
 
 Claude Anchor provides a structured template system that gives Claude:
 
+- **Voice & tone** — Control Claude's personality, attitude, vocabulary, and communication vibe. Loaded first so it colors everything.
 - **Persistent memory** — Long-term knowledge that survives across sessions (user preferences, project conventions, important decisions)
 - **Session continuity** — Short-term context for resuming work after interruptions or reboots
 - **Enforceable rules** — Immutable constraints ("NEVER do X") that Claude must follow, read twice per session to prevent context decay
+- **Design preferences** — Visual design rules: lighter hover colors, WCAG accessibility, typography, flat iconography, UX principles
 - **Conversation preferences** — Standardized output formatting, verbosity levels, and communication style
 - **Lessons learned** — A living record of past mistakes and their fixes, so Claude doesn't repeat them
 - **Task tracking** — Priority-based TODOs with blockers and dependencies
@@ -124,6 +126,8 @@ Without persistent context, Claude:
 - Forgets your preferences and conventions
 - Can't resume interrupted work
 - Has no enforceable behavioral constraints
+- Has no consistent personality or communication style
+- Ignores your design system and accessibility requirements
 
 Anchor fixes all of this with a structured set of markdown templates that Claude reads at session start.
 
@@ -145,10 +149,12 @@ your-project/
 ```
 your-project/
 ├── CLAUDE.md                    # Project context (with load order block)
+├── _VOICE-AND-TONE.md           # Personality, attitude, language style (loaded FIRST)
 ├── _GOLDEN-RULES.md             # Immutable rules (read twice per session)
 ├── _TODOS.md                    # Active tasks and priorities
 ├── _LESSONS-LEARNED.md          # Past mistakes and fixes
 ├── _CONVERSATION-PREFERENCES.md # Output formatting and communication style
+├── _DESIGN-PREFERENCES.md       # Visual design, accessibility, UX rules
 ├── _LONG-TERM-MEMORY.md         # Persistent memory (NEVER delete)
 ├── _SHORT-TERM-MEMORY.md        # Session context (delete when done)
 └── _SYSTEM_ARCHITECTURE.md      # Technical diagrams and system design
@@ -161,14 +167,20 @@ your-project/
 The CLAUDE.md template includes a mandatory startup block. When Claude enters a project with Anchor files, it reads them in this exact sequence:
 
 ```
-1. _GOLDEN-RULES.md              <- Security rules (BINDING)
-2. _TODOS.md                     <- Know what's pending
-3. _LESSONS-LEARNED.md           <- Avoid past mistakes
-4. _CONVERSATION-PREFERENCES.md  <- Output formatting
-5. _GOLDEN-RULES.md              <- Re-read (reinforce)
-6. CLAUDE.md                     <- Full project context
-7. BEGIN conversation
+0. _SHORT-TERM-MEMORY.md         <- IF EXISTS: resume interrupted work
+1. _VOICE-AND-TONE.md            <- READ FIRST — personality and language style
+2. _GOLDEN-RULES.md              <- BINDING rules — MUST FOLLOW every session
+3. _TODOS.md                     <- Know what's pending
+4. _LESSONS-LEARNED.md           <- Avoid past mistakes
+5. _LONG-TERM-MEMORY.md          <- Persistent knowledge and preferences
+6. _CONVERSATION-PREFERENCES.md  <- Output formatting
+7. _DESIGN-PREFERENCES.md        <- Visual design and UX rules
+8. _GOLDEN-RULES.md              <- Re-read (reinforce)
+9. CLAUDE.md                     <- Full project context
+10. BEGIN conversation
 ```
+
+**Why is VOICE-AND-TONE first?** Claude's personality should be established before it reads anything else. It colors how Claude processes every file after it and how it communicates throughout the session.
 
 **Why read GOLDEN-RULES twice?** In long contexts, content read early can get "forgotten" as the context window fills. Re-reading critical rules last keeps them fresh and prevents behavioral drift during the session.
 
@@ -176,15 +188,17 @@ The CLAUDE.md template includes a mandatory startup block. When Claude enters a 
 
 [Back to top](#table-of-contents)
 
-| Template | Purpose | Lifecycle |
-|----------|---------|-----------|
-| `_GOLDEN-RULES.md` | Immutable constraints — things Claude must NEVER/ALWAYS do | Permanent. Updated when new rules are needed. |
-| `_TODOS.md` | Active tasks with priorities, blockers, and dependencies | Ongoing. Tasks move from pending to completed. |
-| `_LESSONS-LEARNED.md` | Documented mistakes with root cause and prevention | Permanent. Add entries immediately when issues are discovered. |
-| `_CONVERSATION-PREFERENCES.md` | Output formatting, colors, progress bars, verbosity | Permanent. Adjusted to match your communication style. |
-| `_LONG-TERM-MEMORY.md` | Persistent knowledge: user identity, system config, code style, decisions | **NEVER delete.** Accumulates over months/years. |
-| `_SHORT-TERM-MEMORY.md` | Session context: current task, progress, what to resume | **Delete when task is complete.** Prevents stale context. |
-| `_SYSTEM_ARCHITECTURE.md` | ASCII diagrams, data flows, component maps, security model | On-demand reference. Updated when architecture changes. |
+| Template | Purpose | Lifecycle | Priority |
+|----------|---------|-----------|----------|
+| `_VOICE-AND-TONE.md` | Personality, attitude, vocabulary, response style, commit format | Permanent. Adjust to match your working style. | **FIRST** |
+| `_GOLDEN-RULES.md` | Immutable constraints — things Claude must NEVER/ALWAYS do | Permanent. Updated when new rules are needed. | **BINDING** |
+| `_TODOS.md` | Active tasks with priorities, blockers, and dependencies | Ongoing. Tasks move from pending to completed. | High |
+| `_LESSONS-LEARNED.md` | Documented mistakes with root cause and prevention | Permanent. Add entries immediately when issues are discovered. | High |
+| `_CONVERSATION-PREFERENCES.md` | Output formatting, colors, progress bars, verbosity | Permanent. Adjusted to match your communication style. | Medium |
+| `_DESIGN-PREFERENCES.md` | Hover states, accessibility, typography, iconography, UX rules | Permanent. Adjust to match your design system. | High |
+| `_LONG-TERM-MEMORY.md` | Persistent knowledge: user identity, system config, code style, decisions | **NEVER delete.** Accumulates over months/years. | High |
+| `_SHORT-TERM-MEMORY.md` | Session context: current task, progress, what to resume | **Delete when task is complete.** Prevents stale context. | Conditional |
+| `_SYSTEM_ARCHITECTURE.md` | ASCII diagrams, data flows, component maps, security model | On-demand reference. Updated when architecture changes. | Reference |
 
 ### Memory Model
 
@@ -213,13 +227,15 @@ All template files use placeholder syntax:
 
 ### Tips
 
-1. **_GOLDEN-RULES.md** — Be specific. Vague rules get ignored. Include "why" for each rule.
-2. **_TODOS.md** — Keep it current. Stale TODOs confuse Claude about priorities.
-3. **_LESSONS-LEARNED.md** — Add entries immediately when you discover gotchas. Future you will thank past you.
-4. **_CONVERSATION-PREFERENCES.md** — Include visual examples of your preferred output format.
-5. **_LONG-TERM-MEMORY.md** — Start with your identity, system environment, and code style. It grows naturally over time.
-6. **_SHORT-TERM-MEMORY.md** — Create one when you need to pause work. Delete it when you resume and finish.
-7. **_SYSTEM_ARCHITECTURE.md** — ASCII diagrams are universally understood. Use them.
+1. **_VOICE-AND-TONE.md** — Set this up first. It shapes everything Claude says. Pick your formality, humor, and energy levels.
+2. **_GOLDEN-RULES.md** — Be specific. Vague rules get ignored. Include "why" for each rule.
+3. **_TODOS.md** — Keep it current. Stale TODOs confuse Claude about priorities.
+4. **_LESSONS-LEARNED.md** — Add entries immediately when you discover gotchas. Future you will thank past you.
+5. **_CONVERSATION-PREFERENCES.md** — Include visual examples of your preferred output format.
+6. **_DESIGN-PREFERENCES.md** — Set your hover, accessibility, and icon rules once. Claude follows them everywhere.
+7. **_LONG-TERM-MEMORY.md** — Start with your identity, system environment, and code style. It grows naturally over time.
+8. **_SHORT-TERM-MEMORY.md** — Create one when you need to pause work. Delete it when you resume and finish.
+9. **_SYSTEM_ARCHITECTURE.md** — ASCII diagrams are universally understood. Use them.
 
 ## Naming Conventions
 
@@ -248,7 +264,7 @@ Together they give Claude full context — what the project is AND how to work o
 | | Conductor | Anchor |
 |---|---|---|
 | **Focus** | Codebase documentation | AI behavior and memory |
-| **Generates** | ARCHITECTURE.md, BUILD.md, API.md, JOURNAL.md | _GOLDEN-RULES.md, _LONG-TERM-MEMORY.md, _TODOS.md |
+| **Generates** | ARCHITECTURE.md, BUILD.md, API.md, JOURNAL.md | _VOICE-AND-TONE.md, _GOLDEN-RULES.md, _DESIGN-PREFERENCES.md, _LONG-TERM-MEMORY.md, _TODOS.md |
 | **Delivery** | `npx claude-conductor` (automated CLI) | Copy templates into project |
 | **Answers** | "What is this codebase?" | "How should Claude behave?" |
 
@@ -271,10 +287,10 @@ Please keep templates framework-agnostic — they should work with any project i
 
 [Back to top](#table-of-contents)
 
-**Claude Anchor is a collection of markdown templates. It:**
-- Has no executable code
-- Makes zero network requests
-- Has no dependencies
+**Claude Anchor is a collection of markdown templates with a lightweight CLI installer. It:**
+- Templates are pure markdown — no executable code runs in your project
+- The CLI (`npx claude-anchor`) only copies template files — nothing else
+- Makes zero network requests (beyond npm install)
 - Has no telemetry or analytics
 - Runs entirely on your local machine
 - Never collects or transmits any data
