@@ -1,223 +1,127 @@
-# SHORT-TERM-MEMORY.md Template
+# Short-Term Memory — [PROJECT_NAME]
 
-**Purpose:** Maintain Claude's context and awareness between sessions or restarts.
-
-This is Claude's "short-term memory" - a way to preserve session context when:
-- System reboots are required
-- Sessions time out or restart
-- Work spans multiple conversations
-- Context needs to be restored quickly
-
-**The memory is temporary** - delete/wipe after the task is complete.
+**Purpose:** Multi-session temporary context. Tracks active issues, ongoing improvements, and near-term notes that persist across several sessions but are NOT permanent.
 
 ---
 
 ## Instructions for Claude
 
-**If this file exists, read it FIRST (step 0 of the load order)** before all other Anchor files. This file restores interrupted session context.
+**This file bridges the gap between single-session RAM and permanent long-term memory.** It holds context that matters for the next 4-10 sessions — things being actively worked on, recently discovered issues, temporary decisions, and in-progress improvements.
 
-When a new session starts and `_SHORT-TERM-MEMORY.md` exists:
+**Read this file at session start (step 1 of the load order, after `_RAM.md` if it exists).** Use it to understand what's currently in flight across sessions.
 
-1. **Read the memory file FIRST** before responding
-2. **Check the date** — if this file is older than 7 days, ask the user if it is still relevant before acting on it
-3. **Acknowledge context** — Let user know you've caught up
-4. **Verify current state** — Confirm where things left off
-5. **Resume seamlessly** — Continue from the documented step
+### What Goes Here
 
-**Memory file locations:**
-- `[PROJECT]/_SHORT-TERM-MEMORY.md` - Project-specific (takes precedence)
-- Optionally: `$HOME/_SHORT-TERM-MEMORY.md` - Global fallback
+- **Active issues being debugged or improved** — problems identified but not yet fully resolved
+- **In-progress feature work** — multi-session tasks that span several conversations
+- **Temporary decisions** — choices made for now that may be revisited
+- **Recent discoveries** — things learned that are relevant to current work but not yet permanent knowledge
+- **Cross-session context** — "we tried X last session and it didn't work, trying Y next"
 
-**If both exist:** Project-specific memory takes precedence. Read it first.
+### What Does NOT Go Here
+
+| Belongs elsewhere | File |
+|---|---|
+| Single-session crash recovery state | `_RAM.md` |
+| Permanent knowledge and preferences | `_LONG-TERM-MEMORY.md` |
+| Documented mistakes with root cause analysis | `_LESSONS-LEARNED.md` |
+| Formal task tracking with priorities | `_TODOS.md` |
+
+### Lifecycle
+
+- **Created:** When multi-session work begins or context needs to persist beyond a single session
+- **Updated:** At session end — capture anything the next session should know
+- **Entries removed:** When an issue is resolved, a feature ships, or a note becomes stale
+- **Entire file deleted:** When all tracked items are resolved and nothing is in flight
+- **Promoted:** If a temporary note proves permanently valuable, move it to `_LONG-TERM-MEMORY.md`
+
+### Staleness Rule
+
+**Review this file at the start of every session.** If an entry is older than 2 weeks and hasn't been touched, either:
+1. Resolve it and remove it
+2. Promote it to `_LONG-TERM-MEMORY.md` if it's permanent knowledge
+3. Move it to `_TODOS.md` if it's deferred work
+4. Delete it if it's no longer relevant
 
 ---
 
 ## Template Structure
 
-When creating a memory file, use this structure:
-
 ```markdown
-# SHORT-TERM-MEMORY - [DATE]
+# Short-Term Memory — [PROJECT_NAME]
 
-**STATUS:** [WAITING FOR REBOOT / IN PROGRESS / BLOCKED / WAITING FOR USER]
-
-Brief description of what's happening (e.g., "User is rebooting to complete X")
+*Last reviewed: [DATE]*
 
 ---
 
-## What We Were Working On
+## Active Issues
 
-### 1. [Task Name] - [COMPLETED/IN PROGRESS/PENDING]
-- What was done
-- What remains
+### [Issue title] — Started [DATE]
+- **Status:** [investigating / fix in progress / testing / nearly resolved]
+- **Context:** [What's happening, what we know so far]
+- **Last session:** [What was tried, what worked, what didn't]
+- **Next session:** [What to try next]
 
-### 2. [Task Name] - [STATUS]
-- Details...
-
----
-
-## Current Step
-
-**Where we stopped:**
-- Specific step or action in progress
-- What the user needs to do (if anything)
-
-**Next Steps After Resume:**
-1. Step one
-2. Step two
-3. Step three
+### [Issue title] — Started [DATE]
+- **Status:** [status]
+- **Context:** [context]
 
 ---
 
-## Commands/Changes Made This Session
+## In-Progress Work
 
-**Security warning:** NEVER include commands containing secrets, tokens, or passwords. Redact sensitive values: `curl -H 'Authorization: Bearer [REDACTED]' ...`
+### [Feature/task name] — Started [DATE]
+- **Goal:** [What we're building/fixing]
+- **Progress:** [X of Y steps done, or percentage, or description]
+- **Decisions made:** [Key choices and why]
+- **Blockers:** [If any]
 
-```bash
-# Any new commands, scripts, or aliases created
-command --example
+---
+
+## Temporary Notes
+
+- [Note]: [Context for why it matters right now] — [DATE]
+- [Note]: [Context] — [DATE]
+
+---
+
+## Recently Resolved (Remove After Confirming Stable)
+
+- [x] [What was resolved] — [DATE resolved]
+- [x] [What was resolved] — [DATE resolved]
+
+---
+
+*Updated: [DATE]*
 ```
 
 ---
 
-## Context Notes
+## Memory Hierarchy
 
-- Important decisions made
-- User preferences discovered
-- Blockers or issues encountered
-
----
-
-*Last updated: [TIMESTAMP]*
 ```
-
----
-
-## Status Types
-
-### WAITING FOR REBOOT
-```markdown
-**STATUS: WAITING FOR REBOOT**
-User is rebooting to complete [installation/update/driver enrollment/etc.]
-
-After reboot, user needs to:
-1. [Action required on boot screen, if any]
-2. [Verification step]
-
-Claude should:
-1. Ask if reboot/enrollment succeeded
-2. Verify with: `[verification command]`
-3. Continue with: [next task]
+_RAM.md                        _SHORT-TERM-MEMORY.md           _LONG-TERM-MEMORY.md
+ - Single session only          - Persists 4-10 sessions        - NEVER delete
+ - Crash recovery               - Active issues & work          - Permanent knowledge
+ - Overwritten constantly        - Updated between sessions      - Accumulates over time
+ - Deleted at session end        - Deleted when items resolve    - Always available
+ - "What am I doing NOW?"        - "What are we working ON?"     - "What do I always need to know?"
 ```
-
-### IN PROGRESS
-```markdown
-**STATUS: IN PROGRESS**
-Currently working on: [task]
-Progress: [X of Y steps complete]
-```
-
-### WAITING FOR USER
-```markdown
-**STATUS: WAITING FOR USER**
-Waiting for: [download to complete / manual installation / decision / etc.]
-Once complete, Claude should: [next steps]
-```
-
-### BLOCKED
-```markdown
-**STATUS: BLOCKED**
-Blocked by: [issue description]
-Workaround attempted: [what was tried]
-Needs: [what's required to unblock]
-```
-
----
-
-## Resume Checklist for Claude
-
-When resuming from a catch-up document:
-
-- [ ] Read the STATUS line first
-- [ ] Understand what was in progress
-- [ ] Note what the user needed to do
-- [ ] Identify the next steps
-- [ ] Ask user to confirm previous step completed (if needed)
-- [ ] Run any verification commands
-- [ ] Continue with next documented step
 
 ---
 
 ## File Management
 
-**Creating a memory file:**
-```bash
-# Main location (home directory)
-$HOME/SHORT-TERM-MEMORY.md
+**Creating:** Create when work spans multiple sessions or when you discover something the next session needs to know.
 
-# Project-specific (in project folder)
-[PROJECT_PATH]/SHORT-TERM-MEMORY.md
-```
+**Updating:** Update at the end of each session with anything the next session should be aware of. Remove resolved items.
 
-**Wiping SHORT-TERM memory after completion:**
-- DELETE `SHORT-TERM-MEMORY.md` when the task/project is complete
-- Or clear contents and update STATUS to "MEMORY CLEARED"
-- Short-term memory should NOT persist indefinitely - it's temporary by design
+**Deleting:** Delete the entire file when nothing is actively in flight. An empty short-term memory means all near-term work is done.
 
-**CRITICAL - Memory File Types:**
-| File | Type | Action After Task |
-|------|------|-------------------|
-| `SHORT-TERM-MEMORY.md` | Temporary | DELETE when task complete |
-| `LONG-TERM-MEMORY.md` | Persistent | NEVER delete unless explicitly requested |
-
-**NEVER delete LONG-TERM-MEMORY.md** - only wipe SHORT-TERM files.
-When in doubt, ASK before deleting any memory file.
+**Do NOT let this file go stale.** A short-term memory full of month-old entries is worse than no file at all — it wastes context and misleads Claude about what's current.
 
 ---
 
-## Example: Reboot Scenario
+**This file is temporary by design. If something belongs here forever, it belongs in `_LONG-TERM-MEMORY.md` instead.**
 
-```markdown
-# SHORT-TERM-MEMORY - [DATE]
-
-**STATUS: WAITING FOR REBOOT**
-
-[USER_NAME] is rebooting to complete [TASK - e.g., driver installation, system update].
-
----
-
-## What We Were Working On
-
-### 1. [Task A] - COMPLETED
-- [What was done]
-- [Committed/saved to where]
-
-### 2. [Task B] - IN PROGRESS
-- [Progress made]
-- [What remains]
-- Needs: [Requirement after reboot]
-
----
-
-## Current Step
-
-**User needs to (on reboot):**
-1. [Action 1 - e.g., Complete setup screen]
-2. [Action 2 - e.g., Enter password]
-3. [Action 3 - e.g., Confirm and reboot]
-
-**Next Steps After Reboot:**
-1. [Verification command or step]
-2. [Continue with task]
-3. [Final step]
-
----
-
-*Last updated: [TIMESTAMP]*
-```
-
----
-
-*This is a TEMPLATE file. Create actual memory files in your project root as `_SHORT-TERM-MEMORY.md`. Wipe after task completion.*
-
-<!-- Claude Anchor v1.0 -->
+<!-- Claude Anchor v1.3 -->

@@ -23,7 +23,8 @@ const FULL_TEMPLATES = [
   { src: '_DESIGN-PREFERENCES.md', desc: 'Visual design, hover states, accessibility, UX rules' },
   { src: '_VOICE-AND-TONE.md', desc: 'Personality, attitude, language style, communication vibe' },
   { src: '_LONG-TERM-MEMORY.md', desc: 'Persistent memory (NEVER delete)' },
-  { src: '_SHORT-TERM-MEMORY.md', desc: 'Session context (delete when done)' },
+  { src: '_SHORT-TERM-MEMORY.md', desc: 'Multi-session temporary context (4-10 sessions)' },
+  { src: '_RAM.md', desc: 'Single-session volatile memory (crash recovery)' },
   { src: '_SYSTEM_ARCHITECTURE.md', desc: 'Technical diagrams and system design' }
 ];
 
@@ -36,11 +37,11 @@ program
   .command('init [target-dir]', { isDefault: true })
   .description('Copy Anchor templates into your project')
   .option('-f, --force', 'Overwrite existing files')
-  .option('--full', 'Copy all 10 templates (default: 3 essential templates)')
+  .option('--full', 'Copy all 11 templates (default: 3 essential templates)')
   .addHelpText('after', `
 Examples:
   $ npx claude-anchor                  # Copy 3 essential templates
-  $ npx claude-anchor --full           # Copy all 10 templates
+  $ npx claude-anchor --full           # Copy all 11 templates
   $ npx claude-anchor ./my-project     # Copy into specific directory
   $ npx claude-anchor --force          # Overwrite existing files
 
@@ -54,7 +55,7 @@ Full template set (--full):
   - _LESSONS-LEARNED.md, _CONVERSATION-PREFERENCES.md
   - _DESIGN-PREFERENCES.md, _VOICE-AND-TONE.md
   - _LONG-TERM-MEMORY.md, _SHORT-TERM-MEMORY.md
-  - _SYSTEM_ARCHITECTURE.md`)
+  - _RAM.md, _SYSTEM_ARCHITECTURE.md`)
   .action(async (targetDir, options) => {
     try {
       const dir = targetDir || '.';
@@ -89,7 +90,7 @@ async function initializeAnchor(targetDir, options) {
   // Mode display
   if (options.full) {
     console.log(chalk.blue('+---------------------------------------+'));
-    console.log(chalk.blue('|') + chalk.blue.bold(' FULL: All 10 behavioral templates       ') + chalk.blue('|'));
+    console.log(chalk.blue('|') + chalk.blue.bold(' FULL: All 11 behavioral templates       ') + chalk.blue('|'));
     console.log(chalk.blue('+---------------------------------------+'));
     console.log(chalk.gray('  Rules, memory, preferences, architecture'));
     console.log(chalk.gray('  Complete behavioral context for Claude'));

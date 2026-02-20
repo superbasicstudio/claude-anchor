@@ -25,7 +25,7 @@ afterAll(async () => {
 describe('CLI', () => {
   test('shows version', () => {
     const output = runCLI('--version');
-    expect(output.trim()).toBe('1.2.0');
+    expect(output.trim()).toBe('1.3.0');
   });
 
   test('shows help', () => {
@@ -63,11 +63,11 @@ describe('Init (essential)', () => {
 });
 
 describe('Init (full)', () => {
-  test('creates all 10 templates with --full', () => {
+  test('creates all 11 templates with --full', () => {
     const output = runCLI(`init ${TEST_DIR} --full`);
 
     expect(output).toContain('[CREATE]');
-    expect(output).toContain('Created 10 template');
+    expect(output).toContain('Created 11 template');
 
     const expectedFiles = [
       'CLAUDE.md',
@@ -79,6 +79,7 @@ describe('Init (full)', () => {
       '_VOICE-AND-TONE.md',
       '_LONG-TERM-MEMORY.md',
       '_SHORT-TERM-MEMORY.md',
+      '_RAM.md',
       '_SYSTEM_ARCHITECTURE.md'
     ];
 

@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-20
+
+### Added
+- **`_RAM.md`** — New single-session volatile memory template. Like actual RAM — holds the working state of the current session so that if the session is killed, context overflows, or work is interrupted, the next session can recover exactly where it left off. Written to continuously, deleted at session end.
+- **Golden Rule #5: Suggest pushing after major fixes** — After resolving significant bugs or completing iterated-on improvements, Claude now suggests committing and pushing to the user's backup system (git, Gitea, GitHub, etc.) to protect completed work.
+- **Golden Rule #6: Maintain _RAM.md continuously** — Claude must write session state to `_RAM.md` throughout every working session for crash recovery.
+- **Zero Sycophancy Rule** in `_VOICE-AND-TONE.md` — Establishes anti-sycophancy as a core framework principle. No flattery, no hype language, no performative enthusiasm. Every token spent on substance, not validation.
+- Framework now ships **11 templates** (up from 10) in `--full` mode
+
+### Changed
+- **`_SHORT-TERM-MEMORY.md` redefined** — Previously single-session context for resuming interrupted work. Now serves as **multi-session temporary memory** (4-10 sessions) for active issues, in-progress improvements, and near-term notes. `_RAM.md` now handles single-session crash recovery.
+- **Session load order updated** — `_RAM.md` is now step 0 (crash recovery, read first if exists), `_SHORT-TERM-MEMORY.md` is step 1 (multi-session context)
+- **Memory hierarchy expanded** — Three tiers: RAM (single session, volatile), Short-Term (4-10 sessions, temporary), Long-Term (permanent, never delete)
+- **Words & Phrases to AVOID** expanded in `_VOICE-AND-TONE.md` — Comprehensive ban list organized into categories: sycophantic openers, hype language, filler/hedging, corporate buzzwords
+- Golden Rules step references updated to match new load order
+- CLI updated to include `_RAM.md` in full template set
+- All version footers updated to v1.3
+
 ## [1.2.0] - 2026-02-16
 
 ### Added
@@ -62,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SECURITY.md with vulnerability reporting policy
 - BSD 2-Clause license
 
+[1.3.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.3.0
 [1.2.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.2.0
 [1.1.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.1.0
 [1.0.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.0.0

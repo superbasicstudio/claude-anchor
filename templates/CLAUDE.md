@@ -19,7 +19,8 @@ After loading, reference these files throughout the session:
 - Check `_LESSONS-LEARNED.md` before proposing solutions to see if the problem has been solved before
 - Check `_LONG-TERM-MEMORY.md` for user preferences, system details, and project conventions
 - Check `_DESIGN-PREFERENCES.md` before writing any CSS, styling, or UI components
-- Check `_SHORT-TERM-MEMORY.md` (if it exists) to resume interrupted work
+- Check `_SHORT-TERM-MEMORY.md` (if it exists) for active multi-session context
+- Write to `_RAM.md` continuously — update it after every meaningful action during the session
 
 **When this file changes:** Re-read it completely. Architecture and context may have shifted.
 
@@ -30,22 +31,24 @@ After loading, reference these files throughout the session:
 **Before engaging with user, Claude MUST read files in this EXACT order:**
 
 ```
-0. _SHORT-TERM-MEMORY.md    ← IF EXISTS: read FIRST (resume interrupted work)
-1. _VOICE-AND-TONE.md       ← READ FIRST — personality, attitude, language style
-2. _GOLDEN-RULES.md         ← BINDING rules — security and constraints (MUST FOLLOW)
-3. _TODOS.md                ← Read thoroughly (know what's pending)
-4. _LESSONS-LEARNED.md      ← Read (avoid past mistakes)
-5. _LONG-TERM-MEMORY.md     ← Read (persistent knowledge and preferences)
-6. _CONVERSATION-PREFERENCES.md  ← Read (display/output preferences)
-7. _DESIGN-PREFERENCES.md   ← Read (visual design and UX rules)
-8. _GOLDEN-RULES.md         ← Re-read AGAIN (reinforce - DO NOT FORGET)
-9. CLAUDE.md (this file)    ← Then read this for full project context
-10. BEGIN conversation       ← Now ready to assist
+0. _RAM.md                       ← IF EXISTS: recover interrupted session state FIRST
+1. _SHORT-TERM-MEMORY.md         ← IF EXISTS: read active multi-session context
+2. _VOICE-AND-TONE.md            ← Personality, attitude, language style
+3. _GOLDEN-RULES.md              ← BINDING rules — security and constraints (MUST FOLLOW)
+4. _TODOS.md                     ← Read thoroughly (know what's pending)
+5. _LESSONS-LEARNED.md           ← Read (avoid past mistakes)
+6. _LONG-TERM-MEMORY.md          ← Read (persistent knowledge and preferences)
+7. _CONVERSATION-PREFERENCES.md  ← Read (display/output preferences)
+8. _DESIGN-PREFERENCES.md        ← Read (visual design and UX rules)
+9. _GOLDEN-RULES.md              ← Re-read AGAIN (reinforce - DO NOT FORGET)
+10. CLAUDE.md (this file)         ← Then read this for full project context
+11. BEGIN conversation            ← Now ready to assist
 ```
 
 **Why this order:**
-- Short-term memory (if present) restores interrupted session context immediately
-- **Voice and tone loaded FIRST — sets Claude's personality before anything else happens**
+- **RAM (if present) restores interrupted session state immediately** — this is crash recovery, read before everything
+- Short-term memory (if present) provides active multi-session context — ongoing issues, in-progress work
+- **Voice and tone sets Claude's personality before anything else happens**
 - Golden Rules are BINDING constraints that MUST be followed every session — loaded right after tone so Claude knows HOW to talk and WHAT it cannot do before any work begins
 - TODOs show pending work and priorities
 - Lessons prevent repeating past mistakes
@@ -62,6 +65,7 @@ After loading, reference these files throughout the session:
 
 | File | Purpose | Lifecycle | Priority |
 |------|---------|-----------|----------|
+| `_RAM.md` | Single-session volatile state — crash recovery | **Auto-managed** — written continuously, deleted at session end | **RECOVERY** |
 | `_VOICE-AND-TONE.md` | Personality, attitude, language style — loaded FIRST | Permanent — adjust to match your working style | **FIRST** |
 | `_GOLDEN-RULES.md` | Immutable constraints Claude MUST follow every session | Permanent — update when new rules needed | **BINDING** |
 | `_TODOS.md` | Active tasks with priorities and blockers | Ongoing — tasks move from pending to completed | High |
@@ -69,7 +73,7 @@ After loading, reference these files throughout the session:
 | `_CONVERSATION-PREFERENCES.md` | Output formatting and communication style | Permanent — adjust to match your preferences | Medium |
 | `_DESIGN-PREFERENCES.md` | Visual design, hover states, accessibility, UX rules | Permanent — adjust to match your design system | High |
 | `_LONG-TERM-MEMORY.md` | Persistent knowledge (user, system, project) | **NEVER delete** — accumulates over time | High |
-| `_SHORT-TERM-MEMORY.md` | Session context for resuming interrupted work | **Delete when task complete** | Conditional |
+| `_SHORT-TERM-MEMORY.md` | Multi-session temporary context (active issues, in-progress work) | **Delete when all items resolved** — persists 4-10 sessions | Conditional |
 | `_SYSTEM_ARCHITECTURE.md` | Technical diagrams, data flow, security model | On-demand — update when architecture changes | Reference |
 
 ---
@@ -195,6 +199,7 @@ After loading, reference these files throughout the session:
 
 | File | Purpose | When to Reference |
 |------|---------|-------------------|
+| [_RAM.md](./_RAM.md) | Crash recovery — single-session state | Written continuously; read at session start if exists |
 | [_VOICE-AND-TONE.md](./_VOICE-AND-TONE.md) | Personality and language style | Always — shapes all communication |
 | [_GOLDEN-RULES.md](./_GOLDEN-RULES.md) | Immutable rules | Before any destructive operation |
 | [_TODOS.md](./_TODOS.md) | Planned improvements | When starting new work |
@@ -202,7 +207,7 @@ After loading, reference these files throughout the session:
 | [_CONVERSATION-PREFERENCES.md](./_CONVERSATION-PREFERENCES.md) | Display/output preferences | When formatting output |
 | [_DESIGN-PREFERENCES.md](./_DESIGN-PREFERENCES.md) | Visual design and UX rules | When writing CSS, styling, or UI components |
 | [_LONG-TERM-MEMORY.md](./_LONG-TERM-MEMORY.md) | Persistent knowledge | For user preferences and system details |
-| [_SHORT-TERM-MEMORY.md](./_SHORT-TERM-MEMORY.md) | Session context | When resuming interrupted work |
+| [_SHORT-TERM-MEMORY.md](./_SHORT-TERM-MEMORY.md) | Multi-session temporary context | Active issues and in-progress work across sessions |
 | [_SYSTEM_ARCHITECTURE.md](./_SYSTEM_ARCHITECTURE.md) | Technical diagrams | When discussing architecture |
 
 ---
@@ -217,7 +222,7 @@ After loading, reference these files throughout the session:
 
 <!-- CUSTOMIZE: Add project-specific rules or constraints below -->
 <!-- Example: terminal limitations, deployment rules, team conventions -->
-<!-- Claude Anchor v1.0 -->
+<!-- Claude Anchor v1.3 -->
 
 ---
 

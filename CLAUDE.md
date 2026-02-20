@@ -23,27 +23,31 @@ Claude Anchor is a **behavioral context framework** — a set of markdown templa
 6. **_DESIGN-PREFERENCES.md** — Visual design, hover states, accessibility, iconography, UX rules
 7. **_VOICE-AND-TONE.md** — Personality, attitude, language style, communication vibe
 8. **_LONG-TERM-MEMORY.md** — Persistent knowledge (NEVER delete)
-9. **_SHORT-TERM-MEMORY.md** — Session context (delete when done)
-10. **_SYSTEM_ARCHITECTURE.md** — Technical diagrams and system design
+9. **_SHORT-TERM-MEMORY.md** — Multi-session temporary context (active issues, in-progress work)
+10. **_RAM.md** — Single-session volatile memory (crash recovery, written continuously)
+11. **_SYSTEM_ARCHITECTURE.md** — Technical diagrams and system design
 
 ### Session Load Order
 ```
-1. _VOICE-AND-TONE.md       <- READ FIRST — personality and language style
-2. _GOLDEN-RULES.md         <- BINDING rules — MUST FOLLOW every session
-3. _TODOS.md                <- Pending work
-4. _LESSONS-LEARNED.md      <- Avoid past mistakes
-5. _CONVERSATION-PREFERENCES.md <- Output formatting
-6. _DESIGN-PREFERENCES.md   <- Visual design and UX rules
-7. _GOLDEN-RULES.md         <- Re-read (prevent context decay)
-8. CLAUDE.md                <- Full project context
-9. BEGIN conversation
+0. _RAM.md                       <- IF EXISTS: recover interrupted session state
+1. _SHORT-TERM-MEMORY.md         <- IF EXISTS: active multi-session context
+2. _VOICE-AND-TONE.md            <- Personality and language style
+3. _GOLDEN-RULES.md              <- BINDING rules — MUST FOLLOW every session
+4. _TODOS.md                     <- Pending work
+5. _LESSONS-LEARNED.md           <- Avoid past mistakes
+6. _CONVERSATION-PREFERENCES.md  <- Output formatting
+7. _DESIGN-PREFERENCES.md        <- Visual design and UX rules
+8. _GOLDEN-RULES.md              <- Re-read (prevent context decay)
+9. CLAUDE.md                     <- Full project context
+10. BEGIN conversation
 ```
 
 ## Key Design Decisions
 
 ### Memory Hierarchy
 - **Long-term memory** — Persistent, never deleted, accumulates over months/years
-- **Short-term memory** — Temporary, deleted after task completion, prevents stale context
+- **Short-term memory** — Multi-session temporary context (4-10 sessions), active issues and in-progress work
+- **RAM** — Single-session volatile memory, written continuously, crash recovery — deleted at session end
 
 ### Golden Rules Read Twice
 Critical rules are read at the start AND re-read before conversation begins. This prevents early context from being "forgotten" in long sessions.
@@ -62,15 +66,18 @@ Together they give Claude full context — what the project is AND how to work o
 
 ## Anti-Patterns (Avoid These)
 - Don't store actual secrets in _LONG-TERM-MEMORY.md
-- Don't leave stale _SHORT-TERM-MEMORY.md files around after tasks complete
+- Don't leave stale _SHORT-TERM-MEMORY.md entries around after items resolve
+- Don't leave _RAM.md files from previous sessions — they indicate an interrupted session that needs recovery
 - Don't write vague golden rules — be specific and include "why"
 - Don't skip the load order — it exists for a reason
 - Don't let _TODOS.md go stale — update it regularly
+- Don't forget to suggest pushing after major fixes — work protection matters
 
 ### Voice & Tone First
 `_VOICE-AND-TONE.md` is loaded as step 1 — before golden rules, before TODOs, before everything. Claude's personality is established first so it colors all subsequent reading and responses.
 
 ## Version History
+- **v1.3.0** — Added `_RAM.md` (single-session volatile memory), redefined `_SHORT-TERM-MEMORY.md` as multi-session context, added git push suggestion directive, added RAM write directive to Golden Rules (11 templates total)
 - **v1.2.0** — Added `_VOICE-AND-TONE.md` and `_DESIGN-PREFERENCES.md` templates (10 templates total), voice/tone loaded first
 - **v1.1.0** — Batteries-included: Claude instructions in every template, CLI, starter security rules
 - **v1.0.0** — Initial open-source release with 7 template files
