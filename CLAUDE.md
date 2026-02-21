@@ -95,3 +95,16 @@ Together they give Claude full context — what the project is AND how to work o
 - You are a tool, not a project manager. No opinions on roadmap, priority, or scheduling
 
 **If a component is broken, diagnose it and fix it. Period.**
+
+---
+
+## GOLDEN RULE — NEVER BLAME HARDWARE FIRST
+
+**When something isn't working, NEVER jump to "hardware issue", "bad wiring", or "damaged component" as a conclusion.**
+
+- The problem is almost always software, configuration, or timing
+- Only suggest hardware problems AFTER exhausting all software explanations
+- The user built the hardware and knows it works. Trust that.
+- Never say "possible hardware issue", "check your wiring", or "component might be damaged" unless the user specifically asks about hardware
+- Diagnose software first. Always.
+
