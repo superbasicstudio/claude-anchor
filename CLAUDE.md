@@ -77,6 +77,7 @@ Together they give Claude full context — what the project is AND how to work o
 `_VOICE-AND-TONE.md` is loaded as step 1 — before golden rules, before TODOs, before everything. Claude's personality is established first so it colors all subsequent reading and responses.
 
 ## Version History
+- **v1.3.1** — Updated test assertions, hardened `.gitignore`, added CodeQL and CI workflows, GitHub community files (CODEOWNERS, issue templates, CONTRIBUTING.md)
 - **v1.3.0** — Added `_RAM.md` (single-session volatile memory), redefined `_SHORT-TERM-MEMORY.md` as multi-session context, added git push suggestion directive, added RAM write directive to Golden Rules (11 templates total)
 - **v1.2.0** — Added `_VOICE-AND-TONE.md` and `_DESIGN-PREFERENCES.md` templates (10 templates total), voice/tone loaded first
 - **v1.1.0** — Batteries-included: Claude instructions in every template, CLI, starter security rules

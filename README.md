@@ -280,12 +280,14 @@ A project can use one or both. They don't overlap — they stack.
 
 [Back to top](#table-of-contents)
 
-We welcome contributions! If you have ideas for new templates, improvements to existing ones, or better documentation:
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
+3. Make your changes and run `npm test`
 4. Submit a pull request
+
+All PRs require passing CI checks (tests across Node 16/18/20 + CodeQL security scan) and a code review from `@superbasicstudio` before merging.
 
 Please keep templates framework-agnostic — they should work with any project in any language.
 
