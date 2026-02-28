@@ -25,7 +25,7 @@ afterAll(async () => {
 describe('CLI', () => {
   test('shows version', () => {
     const output = runCLI('--version');
-    expect(output.trim()).toBe('1.3.0');
+    expect(output.trim()).toBe('1.3.1');
   });
 
   test('shows help', () => {
@@ -107,12 +107,11 @@ describe('Template content', () => {
     for (const file of files) {
       const content = fs.readFileSync(path.join(TEST_DIR, file), 'utf-8');
 
-      // Should NOT contain personal info
-      expect(content).not.toMatch(/thomas/i);
-      expect(content).not.toMatch(/wicker/i);
-      expect(content).not.toMatch(/titan-linux/i);
-      expect(content).not.toMatch(/\/home\/thomas/i);
-      expect(content).not.toMatch(/\/media\/thomas/i);
+      // Should NOT contain real personal/system info (generic checks)
+      expect(content).not.toMatch(/\/home\/[a-z][a-z0-9_-]+\//i);
+      expect(content).not.toMatch(/\/Users\/[a-z][a-z0-9_-]+\//i);
+      expect(content).not.toMatch(/\/media\/[a-z][a-z0-9_-]+\//i);
+      expect(content).not.toMatch(/[a-z0-9._%+-]+@(gmail|yahoo|hotmail|outlook)\.[a-z]{2,}/i);
 
       // Should contain placeholder patterns
       expect(content).toMatch(/\[.*\]/);
