@@ -315,6 +315,10 @@ BSD 2-Clause (c) Super Basic Studio
 
 Made with love by [Super Basic Studio](https://superbasic.studio)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=superbasicstudio/claude-anchor&type=Date)](https://star-history.com/#superbasicstudio/claude-anchor&Date)
+
 ## Keywords
 
 claude, claude code, claude anchor, ai memory, ai context, persistent memory, rules framework, claude code framework, vibe coding, super basic studio
