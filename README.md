@@ -40,6 +40,12 @@
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=superbasicstudio/claude-anchor&type=Date)](https://star-history.com/#superbasicstudio/claude-anchor&Date)
+
+---
+
 Give Claude persistent memory, enforceable rules, and behavioral consistency across sessions. Claude Anchor is the **behavioral brain** — it tells Claude *how to think and behave* in your project.
 
 ## Table of Contents
@@ -314,10 +320,6 @@ BSD 2-Clause (c) Super Basic Studio
 ---
 
 Made with love by [Super Basic Studio](https://superbasic.studio)
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=superbasicstudio/claude-anchor&type=Date)](https://star-history.com/#superbasicstudio/claude-anchor&Date)
 
 ## Keywords
 
