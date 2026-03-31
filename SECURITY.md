@@ -45,7 +45,10 @@ Out of scope:
 
 ## Security Design Principles
 
-- **No executable code** — Pure markdown templates
-- **No dependencies** — Nothing to audit or update
-- **No network requests** — Works entirely offline
-- **No secrets handling** — Templates explicitly warn against storing credentials
+- **Minimal executable code** - CLI installer only; templates are pure markdown
+- **Minimal dependencies** - 3 production deps (chalk, commander, fs-extra), all pinned to exact versions
+- **No network requests** - Works entirely offline
+- **No secrets handling** - Templates explicitly warn against storing credentials
+- **Pinned dependencies** - All versions pinned exactly (no caret/tilde ranges) to prevent supply chain drift
+- **Lock file committed** - `package-lock.json` is tracked in version control for reproducible installs
+- **Automated auditing** - CI runs `npm audit` on every push and PR

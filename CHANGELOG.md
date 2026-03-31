@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-03-31
+
+### Security
+- Pinned all dependency versions to exact (removed caret ranges) to prevent supply chain drift
+- Fixed 3 dev dependency vulnerabilities (brace-expansion, minimatch, picomatch) via audit fix
+- Pinned GitHub Actions to commit SHAs to prevent tag-hijack attacks
+- Added `npm audit` job to CI pipeline (production deps enforced, all deps informational)
+- Added top-level `permissions: contents: read` to all workflows (least privilege)
+
+### Added
+- Expanded test suite from 10 to 48 tests covering CLI, templates, security, and package integrity
+- `.npmrc` with security defaults (save-exact, audit-on-install)
+- `.github/dependabot.yml` for automated dependency and GitHub Actions update PRs
+- Security Audit job in CI workflow
+
+### Changed
+- Minimum Node.js version raised to 22 (dropped EOL Node 16, 18, 20)
+- CI now tests on Node 22 and 24
+- Updated SECURITY.md to accurately reflect project dependencies and security controls
+
 ## [1.3.1] - 2026-02-28
 
 ### Changed
@@ -14,17 +34,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.0] - 2026-02-20
 
 ### Added
-- **`_RAM.md`** — New single-session volatile memory template. Like actual RAM — holds the working state of the current session so that if the session is killed, context overflows, or work is interrupted, the next session can recover exactly where it left off. Written to continuously, deleted at session end.
-- **Golden Rule #5: Suggest pushing after major fixes** — After resolving significant bugs or completing iterated-on improvements, Claude now suggests committing and pushing to the user's backup system (git, Gitea, GitHub, etc.) to protect completed work.
-- **Golden Rule #6: Maintain _RAM.md continuously** — Claude must write session state to `_RAM.md` throughout every working session for crash recovery.
-- **Zero Sycophancy Rule** in `_VOICE-AND-TONE.md` — Establishes anti-sycophancy as a core framework principle. No flattery, no hype language, no performative enthusiasm. Every token spent on substance, not validation.
+- **`_RAM.md`** - New single-session volatile memory template. Like actual RAM - holds the working state of the current session so that if the session is killed, context overflows, or work is interrupted, the next session can recover exactly where it left off. Written to continuously, deleted at session end.
+- **Golden Rule #5: Suggest pushing after major fixes** - After resolving significant bugs or completing iterated-on improvements, Claude now suggests committing and pushing to the user's backup system (git, Gitea, GitHub, etc.) to protect completed work.
+- **Golden Rule #6: Maintain _RAM.md continuously** - Claude must write session state to `_RAM.md` throughout every working session for crash recovery.
+- **Zero Sycophancy Rule** in `_VOICE-AND-TONE.md` - Establishes anti-sycophancy as a core framework principle. No flattery, no hype language, no performative enthusiasm. Every token spent on substance, not validation.
 - Framework now ships **11 templates** (up from 10) in `--full` mode
 
 ### Changed
-- **`_SHORT-TERM-MEMORY.md` redefined** — Previously single-session context for resuming interrupted work. Now serves as **multi-session temporary memory** (4-10 sessions) for active issues, in-progress improvements, and near-term notes. `_RAM.md` now handles single-session crash recovery.
-- **Session load order updated** — `_RAM.md` is now step 0 (crash recovery, read first if exists), `_SHORT-TERM-MEMORY.md` is step 1 (multi-session context)
-- **Memory hierarchy expanded** — Three tiers: RAM (single session, volatile), Short-Term (4-10 sessions, temporary), Long-Term (permanent, never delete)
-- **Words & Phrases to AVOID** expanded in `_VOICE-AND-TONE.md` — Comprehensive ban list organized into categories: sycophantic openers, hype language, filler/hedging, corporate buzzwords
+- **`_SHORT-TERM-MEMORY.md` redefined** - Previously single-session context for resuming interrupted work. Now serves as **multi-session temporary memory** (4-10 sessions) for active issues, in-progress improvements, and near-term notes. `_RAM.md` now handles single-session crash recovery.
+- **Session load order updated** - `_RAM.md` is now step 0 (crash recovery, read first if exists), `_SHORT-TERM-MEMORY.md` is step 1 (multi-session context)
+- **Memory hierarchy expanded** - Three tiers: RAM (single session, volatile), Short-Term (4-10 sessions, temporary), Long-Term (permanent, never delete)
+- **Words & Phrases to AVOID** expanded in `_VOICE-AND-TONE.md` - Comprehensive ban list organized into categories: sycophantic openers, hype language, filler/hedging, corporate buzzwords
 - Golden Rules step references updated to match new load order
 - CLI updated to include `_RAM.md` in full template set
 - All version footers updated to v1.3
@@ -32,11 +52,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2026-02-16
 
 ### Added
-- **`_VOICE-AND-TONE.md`** — New template for controlling Claude's personality, attitude, language style, vocabulary, response structure, commit message style, and error communication. Loaded as **step 1** in the session load order so Claude's personality is established before anything else.
-- **`_DESIGN-PREFERENCES.md`** — New template for visual design rules: lighter hover colors on interactive elements only (never dark), WCAG AA accessibility, keyboard/screen reader support, typography hierarchy, flat iconography, spacing scale, and UX principles.
+- **`_VOICE-AND-TONE.md`** - New template for controlling Claude's personality, attitude, language style, vocabulary, response structure, commit message style, and error communication. Loaded as **step 1** in the session load order so Claude's personality is established before anything else.
+- **`_DESIGN-PREFERENCES.md`** - New template for visual design rules: lighter hover colors on interactive elements only (never dark), WCAG AA accessibility, keyboard/screen reader support, typography hierarchy, flat iconography, spacing scale, and UX principles.
 - Framework now ships **10 templates** (up from 8) in `--full` mode
 - Updated session load order: Voice & Tone is step 1, Golden Rules is step 2
-- Hover state rules explicitly scoped to interactive elements only — no hover effects on static content
+- Hover state rules explicitly scoped to interactive elements only - no hover effects on static content
 
 ### Changed
 - Session load order reordered: `_VOICE-AND-TONE.md` now loads first (step 1), `_GOLDEN-RULES.md` loads second (step 2) as the BINDING enforcement layer
@@ -70,13 +90,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial open-source release
 - 7 template files for AI behavioral context management:
-  - `_GOLDEN-RULES.md` — Immutable rules with enforcement summary
-  - `_TODOS.md` — Priority-based task tracking
-  - `_LESSONS-LEARNED.md` — Problem/Cause/Solution/Prevention documentation
-  - `_CONVERSATION-PREFERENCES.md` — Output formatting, progress bars, verbosity
-  - `_LONG-TERM-MEMORY.md` — Persistent memory with lifecycle rules
-  - `_SHORT-TERM-MEMORY.md` — Session context with resume checklist
-  - `_SYSTEM_ARCHITECTURE.md` — ASCII diagrams, data flows, security model
+  - `_GOLDEN-RULES.md` - Immutable rules with enforcement summary
+  - `_TODOS.md` - Priority-based task tracking
+  - `_LESSONS-LEARNED.md` - Problem/Cause/Solution/Prevention documentation
+  - `_CONVERSATION-PREFERENCES.md` - Output formatting, progress bars, verbosity
+  - `_LONG-TERM-MEMORY.md` - Persistent memory with lifecycle rules
+  - `_SHORT-TERM-MEMORY.md` - Session context with resume checklist
+  - `_SYSTEM_ARCHITECTURE.md` - ASCII diagrams, data flows, security model
 - `CLAUDE.md` template with mandatory session load order
 - Mandatory session load order with golden rules re-reading
 - Memory hierarchy (long-term persistent vs short-term temporary)
@@ -86,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SECURITY.md with vulnerability reporting policy
 - BSD 2-Clause license
 
+[1.4.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.4.0
 [1.3.1]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.3.1
 [1.3.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.3.0
 [1.2.0]: https://github.com/superbasicstudio/claude-anchor/releases/tag/v1.2.0

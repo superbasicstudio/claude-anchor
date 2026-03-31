@@ -46,7 +46,7 @@
 
 ---
 
-Give Claude persistent memory, enforceable rules, and behavioral consistency across sessions. Claude Anchor is the **behavioral brain** — it tells Claude *how to think and behave* in your project.
+Give Claude persistent memory, enforceable rules, and behavioral consistency across sessions. Claude Anchor is the **behavioral brain** - it tells Claude *how to think and behave* in your project.
 
 ## Table of Contents
 
@@ -66,8 +66,8 @@ Give Claude persistent memory, enforceable rules, and behavioral consistency acr
 
 ### External Resources
 
-- [npm package](https://www.npmjs.com/package/claude-anchor) — `npx claude-anchor`
-- [Claude Conductor](https://github.com/superbasicstudio/claude-conductor) — Companion codebase documentation framework
+- [npm package](https://www.npmjs.com/package/claude-anchor) - `npx claude-anchor`
+- [Claude Conductor](https://github.com/superbasicstudio/claude-conductor) - Companion codebase documentation framework
 - [Changelog](CHANGELOG.md)
 - [Security Policy](SECURITY.md)
 
@@ -115,14 +115,14 @@ cp claude-anchor/templates/_LONG-TERM-MEMORY.md ./your-project/
 
 Claude Anchor provides a structured template system that gives Claude:
 
-- **Voice & tone** — Control Claude's personality, attitude, vocabulary, and communication vibe. Loaded first so it colors everything.
-- **Persistent memory** — Long-term knowledge that survives across sessions (user preferences, project conventions, important decisions)
-- **Session continuity** — RAM for single-session crash recovery, short-term memory for multi-session context across 4-10 sessions
-- **Enforceable rules** — Immutable constraints ("NEVER do X") that Claude must follow, read twice per session to prevent context decay
-- **Design preferences** — Visual design rules: lighter hover colors, WCAG accessibility, typography, flat iconography, UX principles
-- **Conversation preferences** — Standardized output formatting, verbosity levels, and communication style
-- **Lessons learned** — A living record of past mistakes and their fixes, so Claude doesn't repeat them
-- **Task tracking** — Priority-based TODOs with blockers and dependencies
+- **Voice & tone** - Control Claude's personality, attitude, vocabulary, and communication vibe. Loaded first so it colors everything.
+- **Persistent memory** - Long-term knowledge that survives across sessions (user preferences, project conventions, important decisions)
+- **Session continuity** - RAM for single-session crash recovery, short-term memory for multi-session context across 4-10 sessions
+- **Enforceable rules** - Immutable constraints ("NEVER do X") that Claude must follow, read twice per session to prevent context decay
+- **Design preferences** - Visual design rules: lighter hover colors, WCAG accessibility, typography, flat iconography, UX principles
+- **Conversation preferences** - Standardized output formatting, verbosity levels, and communication style
+- **Lessons learned** - A living record of past mistakes and their fixes, so Claude doesn't repeat them
+- **Task tracking** - Priority-based TODOs with blockers and dependencies
 
 ### The Problem It Solves
 
@@ -177,7 +177,7 @@ The CLAUDE.md template includes a mandatory startup block. When Claude enters a 
 0. _RAM.md                       <- IF EXISTS: recover interrupted session state
 1. _SHORT-TERM-MEMORY.md         <- IF EXISTS: active multi-session context
 2. _VOICE-AND-TONE.md            <- Personality and language style
-3. _GOLDEN-RULES.md              <- BINDING rules — MUST FOLLOW every session
+3. _GOLDEN-RULES.md              <- BINDING rules - MUST FOLLOW every session
 4. _TODOS.md                     <- Know what's pending
 5. _LESSONS-LEARNED.md           <- Avoid past mistakes
 6. _LONG-TERM-MEMORY.md          <- Persistent knowledge and preferences
@@ -200,9 +200,9 @@ The CLAUDE.md template includes a mandatory startup block. When Claude enters a 
 
 | Template | Purpose | Lifecycle | Priority |
 |----------|---------|-----------|----------|
-| `_RAM.md` | Single-session volatile state — crash recovery | **Auto-managed.** Written continuously, deleted at session end. | **RECOVERY** |
+| `_RAM.md` | Single-session volatile state - crash recovery | **Auto-managed.** Written continuously, deleted at session end. | **RECOVERY** |
 | `_VOICE-AND-TONE.md` | Personality, attitude, vocabulary, response style, commit format | Permanent. Adjust to match your working style. | **FIRST** |
-| `_GOLDEN-RULES.md` | Immutable constraints — things Claude must NEVER/ALWAYS do | Permanent. Updated when new rules are needed. | **BINDING** |
+| `_GOLDEN-RULES.md` | Immutable constraints - things Claude must NEVER/ALWAYS do | Permanent. Updated when new rules are needed. | **BINDING** |
 | `_TODOS.md` | Active tasks with priorities, blockers, and dependencies | Ongoing. Tasks move from pending to completed. | High |
 | `_LESSONS-LEARNED.md` | Documented mistakes with root cause and prevention | Permanent. Add entries immediately when issues are discovered. | High |
 | `_CONVERSATION-PREFERENCES.md` | Output formatting, colors, progress bars, verbosity | Permanent. Adjusted to match your communication style. | Medium |
@@ -229,25 +229,25 @@ _LONG-TERM-MEMORY.md           _SHORT-TERM-MEMORY.md          _RAM.md
 All template files use placeholder syntax:
 
 ```
-[PROJECT_NAME]  — Your project name
-[DESCRIPTION]   — Brief description
-[DATE]          — Current date
-[PATH]          — File/folder paths
-[COMMAND]       — CLI commands
+[PROJECT_NAME]  - Your project name
+[DESCRIPTION]   - Brief description
+[DATE]          - Current date
+[PATH]          - File/folder paths
+[COMMAND]       - CLI commands
 ```
 
 ### Tips
 
-1. **_VOICE-AND-TONE.md** — Set this up first. It shapes everything Claude says. Pick your formality, humor, and energy levels.
-2. **_GOLDEN-RULES.md** — Be specific. Vague rules get ignored. Include "why" for each rule.
-3. **_TODOS.md** — Keep it current. Stale TODOs confuse Claude about priorities.
-4. **_LESSONS-LEARNED.md** — Add entries immediately when you discover gotchas. Future you will thank past you.
-5. **_CONVERSATION-PREFERENCES.md** — Include visual examples of your preferred output format.
-6. **_DESIGN-PREFERENCES.md** — Set your hover, accessibility, and icon rules once. Claude follows them everywhere.
-7. **_LONG-TERM-MEMORY.md** — Start with your identity, system environment, and code style. It grows naturally over time.
-8. **_SHORT-TERM-MEMORY.md** — Use for context that should persist across several sessions. Delete entries as they're resolved.
-9. **_RAM.md** — Claude manages this automatically. If you see one at session start, it means the last session was interrupted.
-10. **_SYSTEM_ARCHITECTURE.md** — ASCII diagrams are universally understood. Use them.
+1. **_VOICE-AND-TONE.md** - Set this up first. It shapes everything Claude says. Pick your formality, humor, and energy levels.
+2. **_GOLDEN-RULES.md** - Be specific. Vague rules get ignored. Include "why" for each rule.
+3. **_TODOS.md** - Keep it current. Stale TODOs confuse Claude about priorities.
+4. **_LESSONS-LEARNED.md** - Add entries immediately when you discover gotchas. Future you will thank past you.
+5. **_CONVERSATION-PREFERENCES.md** - Include visual examples of your preferred output format.
+6. **_DESIGN-PREFERENCES.md** - Set your hover, accessibility, and icon rules once. Claude follows them everywhere.
+7. **_LONG-TERM-MEMORY.md** - Start with your identity, system environment, and code style. It grows naturally over time.
+8. **_SHORT-TERM-MEMORY.md** - Use for context that should persist across several sessions. Delete entries as they're resolved.
+9. **_RAM.md** - Claude manages this automatically. If you see one at session start, it means the last session was interrupted.
+10. **_SYSTEM_ARCHITECTURE.md** - ASCII diagrams are universally understood. Use them.
 
 ## Naming Conventions
 
@@ -267,11 +267,11 @@ The underscore prefix keeps supporting files visually grouped at the top of dire
 
 **Two repos, two tools, complementary not competitive.**
 
-Anchor is the **behavioral brain** — it manages Claude's rules, memory, conversation preferences, and session continuity. It tells Claude *how to think and behave*.
+Anchor is the **behavioral brain** - it manages Claude's rules, memory, conversation preferences, and session continuity. It tells Claude *how to think and behave*.
 
-[Claude Conductor](https://github.com/superbasicstudio/claude-conductor) is the **codebase brain** — it documents your project's architecture, APIs, build systems, errors, and development history. It tells Claude *what your project is*.
+[Claude Conductor](https://github.com/superbasicstudio/claude-conductor) is the **codebase brain** - it documents your project's architecture, APIs, build systems, errors, and development history. It tells Claude *what your project is*.
 
-Together they give Claude full context — what the project is AND how to work on it.
+Together they give Claude full context - what the project is AND how to work on it.
 
 | | Conductor | Anchor |
 |---|---|---|
@@ -280,7 +280,7 @@ Together they give Claude full context — what the project is AND how to work o
 | **Delivery** | `npx claude-conductor` (automated CLI) | Copy templates into project |
 | **Answers** | "What is this codebase?" | "How should Claude behave?" |
 
-A project can use one or both. They don't overlap — they stack.
+A project can use one or both. They don't overlap - they stack.
 
 ## Contributing
 
@@ -293,17 +293,17 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for full detail
 3. Make your changes and run `npm test`
 4. Submit a pull request
 
-All PRs require passing CI checks (tests across Node 16/18/20 + CodeQL security scan) and a code review from `@superbasicstudio` before merging.
+All PRs require passing CI checks (tests across Node 22/24 + CodeQL security scan) and a code review from `@superbasicstudio` before merging.
 
-Please keep templates framework-agnostic — they should work with any project in any language.
+Please keep templates framework-agnostic - they should work with any project in any language.
 
 ## Privacy & Security
 
 [Back to top](#table-of-contents)
 
 **Claude Anchor is a collection of markdown templates with a lightweight CLI installer. It:**
-- Templates are pure markdown — no executable code runs in your project
-- The CLI (`npx claude-anchor`) only copies template files — nothing else
+- Templates are pure markdown - no executable code runs in your project
+- The CLI (`npx claude-anchor`) only copies template files - nothing else
 - Makes zero network requests (beyond npm install)
 - Has no telemetry or analytics
 - Runs entirely on your local machine
